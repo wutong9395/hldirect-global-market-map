@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-:root { --paper: #f3efe4; --ink: #181713; --orange: #ff5b22; --green: #1c6e50; --line: rgba(24,23,19,.25); --soft: rgba(255,255,255,.38); }
+:root { --paper: #f3efe4; --ink: #181713; --orange: #ff5b22; --green: #1c6e50; --line: rgba(24,23,19,.25); --soft: rgba(255,255,255,.38); --font-geist-mono: Consolas, "SFMono-Regular", monospace; }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { margin: 0; background: var(--paper); color: var(--ink); font-family: Arial, "PingFang SC", "Microsoft YaHei", sans-serif; }

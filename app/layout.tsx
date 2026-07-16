@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
-const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
-
 export const metadata: Metadata = {
+  metadataBase: new URL("https://wutong9395.github.io/hldirect-global-market-map/"),
   title: "HLDIRECT 全网销售地图",
   description: "HLDIRECT 在 Amazon、Walmart、独立站、Newegg、TikTok Shop 等公开渠道的店铺链接与热销商品信号。",
   openGraph: {
@@ -17,5 +14,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="zh-CN"><body className={`${geistSans.variable} ${geistMono.variable}`}>{children}</body></html>;
+  return <html lang="zh-CN"><body>{children}</body></html>;
 }
