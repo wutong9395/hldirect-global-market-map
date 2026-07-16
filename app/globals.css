@@ -1,0 +1,161 @@
+@import "tailwindcss";
+
+:root { --paper: #f3efe4; --ink: #181713; --orange: #ff5b22; --green: #1c6e50; --line: rgba(24,23,19,.25); --soft: rgba(255,255,255,.38); }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: Arial, "PingFang SC", "Microsoft YaHei", sans-serif; }
+button, input { font: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
+a { color: inherit; text-decoration: none; }
+main { overflow: hidden; }
+
+.topbar { position: sticky; top: 0; z-index: 30; min-height: 72px; padding: 0 3vw; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; border-bottom: 1px solid var(--ink); background: rgba(243,239,228,.94); backdrop-filter: blur(12px); }
+.wordmark { width: fit-content; font: 900 23px/1 Arial, sans-serif; letter-spacing: -.06em; }
+.wordmark span { color: var(--orange); }
+.topbar nav { display: flex; gap: 30px; font-size: 13px; font-weight: 700; }
+.topbar nav a:hover { color: var(--orange); }
+.shareButton, footer button { justify-self: end; border: 1px solid var(--ink); padding: 10px 15px; background: transparent; color: var(--ink); cursor: pointer; font-size: 12px; font-weight: 800; }
+.shareButton:hover, footer button:hover { background: var(--ink); color: var(--paper); }
+
+.hero { padding: 38px 3vw 0; }
+.eyebrow { display: flex; justify-content: space-between; border-bottom: 1px solid var(--ink); padding-bottom: 10px; font: 700 11px/1 var(--font-geist-mono), monospace; letter-spacing: .12em; text-transform: uppercase; }
+.hero h1 { margin: 36px 0 28px; max-width: 1140px; font: 800 clamp(66px, 9.4vw, 150px)/.83 Georgia, "Songti SC", serif; letter-spacing: -.075em; }
+.hero h1 em { color: var(--orange); font-style: normal; }
+.heroGrid { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(260px, .65fr); border: 1px solid var(--ink); }
+.thesis { min-height: 230px; padding: 28px 32px; display: grid; grid-template-columns: 160px 1fr; align-items: start; background: var(--orange); border-right: 1px solid var(--ink); }
+.thesisLabel { margin: 0; font: 800 11px/1 var(--font-geist-mono), monospace; letter-spacing: .1em; text-transform: uppercase; }
+.thesis > p:last-child { margin: 0; max-width: 760px; font: 500 clamp(24px, 3vw, 42px)/1.05 Georgia, "Songti SC", serif; letter-spacing: -.035em; }
+.thesis strong { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px; }
+.heroNote { padding: 28px; background: var(--green); color: var(--paper); display: flex; flex-direction: column; justify-content: space-between; }
+.heroNote span { font: 800 11px/1 var(--font-geist-mono), monospace; letter-spacing: .12em; }
+.heroNote p { margin: 60px 0 0; font-size: 17px; line-height: 1.45; }
+.metrics { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--ink); border-top: 0; }
+.metrics > div { padding: 22px 24px; display: flex; align-items: end; gap: 14px; border-right: 1px solid var(--ink); }
+.metrics > div:last-child { border-right: 0; }
+.metrics strong { font: 700 42px/.8 Georgia, serif; }
+.metrics span { max-width: 130px; font-size: 11px; line-height: 1.25; text-transform: uppercase; }
+
+.section { padding: 110px 3vw 0; }
+.sectionHead { display: grid; grid-template-columns: 1fr minmax(320px, .55fr); align-items: end; gap: 40px; padding-bottom: 18px; border-bottom: 1px solid var(--ink); }
+.sectionHead > div { display: flex; align-items: baseline; gap: 18px; }
+.sectionNo { font: 700 12px/1 var(--font-geist-mono), monospace; color: var(--orange); }
+.sectionHead h2 { margin: 0; font: 700 clamp(34px, 4vw, 60px)/.95 Georgia, "Songti SC", serif; letter-spacing: -.045em; }
+.sectionHead > p { margin: 0; font-size: 13px; line-height: 1.55; }
+
+.channelGrid { display: grid; grid-template-columns: repeat(4, 1fr); border-left: 1px solid var(--ink); }
+.channelCard { min-height: 230px; padding: 20px; display: flex; flex-direction: column; border-right: 1px solid var(--ink); border-bottom: 1px solid var(--ink); transition: background .2s, color .2s; }
+.channelCard:hover { background: var(--ink); color: var(--paper); }
+.channelCardTop, .channelFoot { display: flex; justify-content: space-between; align-items: center; font: 700 10px/1 var(--font-geist-mono), monospace; text-transform: uppercase; }
+.evidence { padding: 5px 7px; border: 1px solid currentColor; }
+.evidence.强 { background: var(--green); color: white; border-color: var(--green); }
+.evidence.中 { background: var(--orange); color: var(--ink); border-color: var(--orange); }
+.channelCard h3 { margin: 43px 0 7px; font: 700 23px/1 Georgia, "Songti SC", serif; }
+.channelCard p { margin: 0; font-size: 12px; opacity: .7; }
+.channelFoot { margin-top: auto; padding-top: 20px; border-top: 1px solid currentColor; }
+.secondaryLinks { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; padding: 18px 0; border-bottom: 1px solid var(--ink); font-size: 12px; }
+.secondaryLinks > span:first-child { font-weight: 800; text-transform: uppercase; }
+.secondaryLinks a { text-decoration: underline; text-underline-offset: 3px; }
+.secondaryLinks .caveat { margin-left: auto; opacity: .62; }
+
+.productsSection { padding-top: 130px; }
+.filterPanel { position: sticky; top: 72px; z-index: 20; padding: 16px 0 0; background: var(--paper); border-bottom: 1px solid var(--ink); }
+.channelPills, .categoryPills { display: flex; gap: 8px; flex-wrap: wrap; }
+.channelPills { padding-bottom: 14px; }
+.channelPills button, .categoryPills button { border: 1px solid var(--ink); border-radius: 999px; background: transparent; padding: 8px 12px; cursor: pointer; font-size: 11px; font-weight: 700; }
+.channelPills button:hover, .categoryPills button:hover { background: rgba(24,23,19,.08); }
+.channelPills button.active { background: var(--ink); color: var(--paper); }
+.categoryPills button.active { background: var(--orange); }
+.filterRow { display: grid; grid-template-columns: minmax(280px, 1fr) auto; gap: 20px; align-items: center; padding: 14px 0; border-top: 1px solid var(--line); }
+.searchBox { display: flex; align-items: center; gap: 10px; }
+.searchBox span { font-size: 23px; }
+.searchBox input { width: 100%; border: 0; outline: 0; background: transparent; color: var(--ink); font-size: 14px; }
+.resultMeta { padding: 13px 0; display: flex; justify-content: space-between; font: 700 10px/1 var(--font-geist-mono), monospace; text-transform: uppercase; }
+
+.tables { display: grid; gap: 34px; }
+.rankTable { border: 1px solid var(--ink); background: var(--soft); }
+.tableHead { padding: 20px; display: grid; grid-template-columns: 1fr minmax(320px, .7fr); align-items: start; border-bottom: 1px solid var(--ink); }
+.tableHead > div:first-child { display: flex; align-items: baseline; gap: 14px; }
+.tableHead span { font: 700 10px/1 var(--font-geist-mono), monospace; color: var(--orange); }
+.tableHead h3 { margin: 0; font: 700 27px/1 Georgia, "Songti SC", serif; }
+.tableHead > div:last-child { display: flex; justify-content: space-between; gap: 20px; align-items: start; }
+.tableHead p, .tableHead a { margin: 0; font-size: 11px; line-height: 1.4; }
+.tableHead p { max-width: 300px; opacity: .7; }
+.tableHead a { white-space: nowrap; text-decoration: underline; text-underline-offset: 3px; }
+.productRow { min-height: 72px; padding: 0 18px; display: grid; grid-template-columns: 54px minmax(260px, 1.5fr) 100px minmax(190px, .7fr) 28px; gap: 16px; align-items: center; border-bottom: 1px solid var(--line); transition: background .16s; }
+.productRow:last-child { border-bottom: 0; }
+.productRow:hover { background: #fff9ef; }
+.rank { font: 700 20px/1 Georgia, serif; color: var(--orange); }
+.productName { display: flex; flex-direction: column; gap: 5px; }
+.productName strong { font-size: 14px; }
+.productName small { font: 10px/1 var(--font-geist-mono), monospace; opacity: .55; }
+.category { width: fit-content; padding: 5px 8px; border: 1px solid var(--ink); font-size: 10px; font-weight: 800; }
+.category-泳池浮具 { background: var(--orange); }
+.category-边桌 { background: #f0d98b; }
+.category-游戏椅 { background: #cfddd6; }
+.signal { font: 11px/1.4 var(--font-geist-mono), monospace; }
+.out { justify-self: end; font-size: 18px; }
+.empty { padding: 80px 20px; border: 1px solid var(--ink); text-align: center; }
+
+.insightBand { margin-top: 120px; padding: 48px 3vw; display: grid; grid-template-columns: 1.5fr .7fr; align-items: end; gap: 60px; background: var(--orange); border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
+.insightBand span { font: 800 10px/1 var(--font-geist-mono), monospace; text-transform: uppercase; letter-spacing: .1em; }
+.insightBand h2 { margin: 18px 0 0; max-width: 920px; font: 700 clamp(40px, 5.5vw, 84px)/.95 Georgia, "Songti SC", serif; letter-spacing: -.055em; }
+.insightBand p { margin: 0; font-size: 17px; line-height: 1.55; }
+
+.methodSection { padding-bottom: 110px; }
+.methodGrid { display: grid; grid-template-columns: repeat(4, 1fr); border-left: 1px solid var(--ink); }
+.methodGrid > div { min-height: 230px; padding: 22px; border-right: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
+.methodGrid span { font: 700 11px/1 var(--font-geist-mono), monospace; color: var(--orange); }
+.methodGrid h3 { margin: 55px 0 12px; font: 700 21px/1.1 Georgia, "Songti SC", serif; }
+.methodGrid p { margin: 0; font-size: 12px; line-height: 1.55; }
+.finePrint { margin: 18px 0 0; max-width: 960px; font-size: 11px; line-height: 1.55; opacity: .66; }
+
+footer { padding: 32px 3vw; display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: end; background: var(--ink); color: var(--paper); }
+.footerMark { font: 800 28px/.85 Georgia, serif; color: var(--orange); }
+footer p { margin: 3px 0; font-size: 11px; text-align: center; opacity: .75; }
+footer button { color: var(--paper); border-color: var(--paper); }
+footer button:hover { background: var(--paper); color: var(--ink); }
+
+@media (max-width: 1050px) {
+  .channelGrid, .methodGrid { grid-template-columns: repeat(2, 1fr); }
+  .metrics { grid-template-columns: repeat(2, 1fr); }
+  .metrics > div:nth-child(2) { border-right: 0; }
+  .metrics > div:nth-child(-n+2) { border-bottom: 1px solid var(--ink); }
+  .thesis { grid-template-columns: 1fr; gap: 36px; }
+  .productRow { grid-template-columns: 48px minmax(220px, 1fr) 90px minmax(160px, .65fr) 24px; }
+  .filterPanel { position: static; }
+}
+
+@media (max-width: 760px) {
+  .topbar { min-height: 62px; grid-template-columns: 1fr auto; }
+  .topbar nav { display: none; }
+  .hero { padding-top: 24px; }
+  .eyebrow span:last-child { display: none; }
+  .hero h1 { margin: 26px 0 20px; font-size: clamp(54px, 18vw, 88px); }
+  .heroGrid, .sectionHead, .tableHead, .insightBand { grid-template-columns: 1fr; }
+  .thesis { min-height: 0; border-right: 0; border-bottom: 1px solid var(--ink); }
+  .heroNote p { margin-top: 32px; }
+  .metrics { grid-template-columns: 1fr 1fr; }
+  .metrics > div { min-height: 88px; padding: 16px; align-items: center; }
+  .metrics strong { font-size: 32px; }
+  .metrics span { font-size: 9px; }
+  .section { padding-top: 82px; }
+  .sectionHead { gap: 18px; }
+  .sectionHead > p { max-width: 520px; }
+  .channelGrid, .methodGrid { grid-template-columns: 1fr; }
+  .channelCard { min-height: 190px; }
+  .secondaryLinks .caveat { margin-left: 0; flex-basis: 100%; }
+  .filterRow { grid-template-columns: 1fr; }
+  .tableHead { gap: 18px; }
+  .tableHead > div:last-child { display: grid; gap: 10px; }
+  .productRow { padding: 14px; grid-template-columns: 38px 1fr auto; gap: 8px 12px; }
+  .productName { grid-column: 2 / 4; }
+  .category { grid-column: 2; }
+  .signal { grid-column: 2 / 4; }
+  .out { grid-column: 3; grid-row: 1; }
+  .insightBand { margin-top: 84px; gap: 32px; }
+  .insightBand h2 { font-size: 47px; }
+  footer { grid-template-columns: 1fr auto; gap: 26px; }
+  footer > div:nth-child(2) { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
