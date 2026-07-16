@@ -19,8 +19,9 @@ main { overflow: hidden; }
 
 .hero { padding: 38px 3vw 0; }
 .eyebrow { display: flex; justify-content: space-between; border-bottom: 1px solid var(--ink); padding-bottom: 10px; font: 700 11px/1 var(--font-geist-mono), monospace; letter-spacing: .12em; text-transform: uppercase; }
-.hero h1 { margin: 36px 0 28px; max-width: 1140px; font: 800 clamp(66px, 9.4vw, 150px)/.83 Georgia, "Songti SC", serif; letter-spacing: -.075em; }
-.hero h1 em { color: var(--orange); font-style: normal; }
+.hero h1 { margin: 36px 0 28px; max-width: 1180px; display: grid; gap: 12px; }
+.hero h1 > span { font: 800 clamp(64px, 8.2vw, 130px)/.92 Georgia, "Songti SC", serif; letter-spacing: -.045em; white-space: nowrap; }
+.hero h1 em { display: block; color: var(--orange); font: 800 clamp(58px, 7.6vw, 120px)/.98 Georgia, "Songti SC", serif; font-style: normal; letter-spacing: -.045em; }
 .heroGrid { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(260px, .65fr); border: 1px solid var(--ink); }
 .thesis { min-height: 230px; padding: 28px 32px; display: grid; grid-template-columns: 160px 1fr; align-items: start; background: var(--orange); border-right: 1px solid var(--ink); }
 .thesisLabel { margin: 0; font: 800 11px/1 var(--font-geist-mono), monospace; letter-spacing: .1em; text-transform: uppercase; }
@@ -56,21 +57,6 @@ main { overflow: hidden; }
 .secondaryLinks > span:first-child { font-weight: 800; text-transform: uppercase; }
 .secondaryLinks a { text-decoration: underline; text-underline-offset: 3px; }
 .secondaryLinks .caveat { margin-left: auto; opacity: .62; }
-
-.mapSection { padding-top: 130px; }
-.worldMapWrap { border: 1px solid var(--ink); border-top: 0; background: rgba(255,255,255,.22); }
-.worldMap { display: block; width: 100%; height: auto; max-height: 620px; }
-.mapSphere { fill: rgba(255,255,255,.36); stroke: var(--ink); stroke-width: 1.2; }
-.mapCountry { fill: #d9d3c5; stroke: var(--paper); stroke-width: .75; transition: fill .18s; }
-.worldMap:hover .mapCountry { fill: #d1cab9; }
-.mapPoint circle:first-child { fill: var(--orange); stroke: var(--ink); stroke-width: 2; }
-.mapPoint .mapPulse { fill: none; stroke: var(--orange); stroke-width: 2; opacity: .48; }
-.mapPoint text { fill: var(--ink); font: 800 13px/1 Arial, sans-serif; paint-order: stroke; stroke: var(--paper); stroke-width: 5px; stroke-linejoin: round; }
-.mapFilters { display: grid; grid-template-columns: repeat(9, 1fr); border-top: 1px solid var(--ink); }
-.mapFilters button { min-width: 0; padding: 14px 8px; display: grid; gap: 4px; border: 0; border-right: 1px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer; font: 800 12px/1 Arial, sans-serif; }
-.mapFilters button:last-child { border-right: 0; }
-.mapFilters button:hover { background: var(--orange); }
-.mapFilters button span { font: 10px/1 var(--font-geist-mono), monospace; opacity: .65; }
 
 .productsSection { padding-top: 130px; }
 .filterPanel { position: sticky; top: 72px; z-index: 20; padding: 16px 0 0; background: var(--paper); border-bottom: 1px solid var(--ink); }
@@ -138,9 +124,6 @@ footer button:hover { background: var(--paper); color: var(--ink); }
   .metrics > div:nth-child(2) { border-right: 0; }
   .metrics > div:nth-child(-n+2) { border-bottom: 1px solid var(--ink); }
   .thesis { grid-template-columns: 1fr; gap: 36px; }
-  .mapFilters { grid-template-columns: repeat(5, 1fr); }
-  .mapFilters button:nth-child(5) { border-right: 0; }
-  .mapFilters button:nth-child(-n+5) { border-bottom: 1px solid var(--ink); }
   .productRow { grid-template-columns: 42px 64px minmax(200px, 1fr) 90px minmax(150px, .65fr) 24px; }
   .filterPanel { position: static; }
 }
@@ -150,7 +133,9 @@ footer button:hover { background: var(--paper); color: var(--ink); }
   .topbar nav { display: none; }
   .hero { padding-top: 24px; }
   .eyebrow span:last-child { display: none; }
-  .hero h1 { margin: 26px 0 20px; font-size: clamp(54px, 18vw, 88px); }
+  .hero h1 { margin: 26px 0 20px; gap: 6px; }
+  .hero h1 > span { font-size: clamp(46px, 14vw, 70px); }
+  .hero h1 em { font-size: clamp(44px, 12.5vw, 64px); }
   .heroGrid, .sectionHead, .tableHead, .insightBand { grid-template-columns: 1fr; }
   .thesis { min-height: 0; border-right: 0; border-bottom: 1px solid var(--ink); }
   .heroNote p { margin-top: 32px; }
@@ -164,13 +149,6 @@ footer button:hover { background: var(--paper); color: var(--ink); }
   .channelGrid, .methodGrid { grid-template-columns: 1fr; }
   .channelCard { min-height: 190px; }
   .secondaryLinks .caveat { margin-left: 0; flex-basis: 100%; }
-  .mapSection { padding-top: 82px; }
-  .worldMap { min-width: 680px; transform: translateX(-145px); }
-  .worldMapWrap { overflow: hidden; }
-  .mapFilters { grid-template-columns: repeat(3, 1fr); }
-  .mapFilters button, .mapFilters button:nth-child(5) { border-right: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
-  .mapFilters button:nth-child(3n) { border-right: 0; }
-  .mapFilters button:nth-last-child(-n+3) { border-bottom: 0; }
   .filterRow { grid-template-columns: 1fr; }
   .tableHead { gap: 18px; }
   .tableHead > div:last-child { display: grid; gap: 10px; }

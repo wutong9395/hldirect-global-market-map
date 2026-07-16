@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: "HLDIRECT 在 Amazon、Walmart、独立站、Newegg、TikTok Shop 等公开渠道的店铺链接、商品评价数、产品图片与全球覆盖。",
   openGraph: {
     title: "HLDIRECT 全网评价地图",
-    description: "跨平台店铺入口、公开评价数优先榜、商品图片与世界渠道地图。",
+    description: "跨平台店铺入口、公开评价数优先榜、商品图片与欧洲站点覆盖。",
     images: [{ url: "/hldirect-market-og.png", width: 1200, height: 630 }],
   },
   twitter: { card: "summary_large_image", images: ["/hldirect-market-og.png"] },

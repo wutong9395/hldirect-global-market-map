@@ -1,9 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { geoNaturalEarth1, geoPath } from "d3-geo";
-import { feature } from "topojson-client";
-import world from "world-atlas/countries-110m.json";
 import amazonScrape from "../data/amazon-scrape.json";
 
 type Category = "游戏桌" | "游戏椅" | "泳池浮具" | "边桌" | "其他";
@@ -170,23 +167,6 @@ const otherChannels: Channel[] = [
 const channels: Channel[] = [...amazonChannels, ...otherChannels];
 const categories = ["全部", "游戏桌", "游戏椅", "泳池浮具", "边桌"] as const;
 
-const mapWidth = 1200;
-const mapHeight = 540;
-const projection = geoNaturalEarth1().fitExtent([[18, 18], [mapWidth - 18, mapHeight - 18]], { type: "Sphere" } as never);
-const pathGenerator = geoPath(projection);
-const countryFeatures = (feature(world as never, (world as { objects: { countries: never } }).objects.countries) as unknown as { features: unknown[] }).features;
-const mapPoints = [
-  { id: "amazon-ca", label: "CA", coords: [-106, 56] as [number, number], dx: -24, dy: -10 },
-  { id: "amazon-us", label: "US", coords: [-98, 38] as [number, number], dx: -18, dy: 25 },
-  { id: "amazon-mx", label: "MX", coords: [-102, 23] as [number, number], dx: -22, dy: 28 },
-  { id: "amazon-uk", label: "UK", coords: [-3.4, 55] as [number, number], dx: -40, dy: -15 },
-  { id: "amazon-fr", label: "FR", coords: [2.2, 46.2] as [number, number], dx: -48, dy: 26 },
-  { id: "amazon-de", label: "DE", coords: [10.45, 51.16] as [number, number], dx: 16, dy: -12 },
-  { id: "amazon-it", label: "IT", coords: [12.5, 42.8] as [number, number], dx: 18, dy: 28 },
-  { id: "amazon-es", label: "ES", coords: [-3.7, 40.4] as [number, number], dx: -48, dy: 26 },
-  { id: "amazon-jp", label: "JP", coords: [138, 37] as [number, number], dx: 17, dy: -10 },
-];
-
 export default function Home() {
   const [selectedChannel, setSelectedChannel] = useState("all");
   const [selectedCategory, setSelectedCategory] = useState<(typeof categories)[number]>("全部");
@@ -215,26 +195,20 @@ export default function Home() {
     window.setTimeout(() => setCopied(false), 1800);
   };
 
-  const selectFromMap = (id: string) => {
-    setSelectedChannel(id);
-    setSelectedCategory("全部");
-    window.setTimeout(() => document.getElementById("products")?.scrollIntoView({ behavior: "smooth" }), 0);
-  };
-
   return (
     <main>
       <header className="topbar">
         <a className="wordmark" href="#top" aria-label="回到顶部">HL<span>DIRECT</span></a>
-        <nav aria-label="页面导航"><a href="#map">地图</a><a href="#channels">渠道</a><a href="#products">评价榜</a><a href="#method">方法</a></nav>
+        <nav aria-label="页面导航"><a href="#channels">渠道</a><a href="#products">评价榜</a><a href="#method">方法</a></nav>
         <button className="shareButton" onClick={copyShareLink}>{copied ? "链接已复制" : "分享报告 ↗"}</button>
       </header>
 
       <section className="hero" id="top">
         <div className="eyebrow"><span>Review Map 02</span><span>更新于 2026-07-16</span></div>
-        <h1>HLDIRECT<br /><em>全网评价地图</em></h1>
+        <h1><span>HLDIRECT</span><em>全网评价地图</em></h1>
         <div className="heroGrid">
           <div className="thesis"><p className="thesisLabel">核心发现</p><p>评价数显示，<strong>游戏桌仍是品牌的口碑主力</strong>；泳池浮具与充电边桌是新增品类，但评价积累尚处于早期。</p></div>
-          <div className="heroNote"><span>本次新增</span><p>英国、德国、法国、意大利、西班牙站点，逐条商品图片，以及可筛选的世界渠道地图。</p></div>
+          <div className="heroNote"><span>本次新增</span><p>英国、德国、法国、意大利、西班牙站点，以及逐条商品图片与公开评价数口径。</p></div>
         </div>
         <div className="metrics">
           <div><strong>{channels.length}</strong><span>个站点 / 渠道</span></div>
@@ -244,27 +218,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section mapSection" id="map">
-        <div className="sectionHead"><div><span className="sectionNo">01</span><h2>世界渠道地图</h2></div><p>地图标记来自各 Amazon 地区站点的公开商品页；点击下方地区可直接查看该站评价榜。</p></div>
-        <div className="worldMapWrap">
-          <svg className="worldMap" viewBox={`0 0 ${mapWidth} ${mapHeight}`} role="img" aria-labelledby="world-map-title world-map-desc">
-            <title id="world-map-title">HLDIRECT 全球 Amazon 站点分布</title>
-            <desc id="world-map-desc">标记美国、加拿大、墨西哥、日本、英国、德国、法国、意大利和西班牙九个地区站点。</desc>
-            <path className="mapSphere" d={pathGenerator({ type: "Sphere" } as never) ?? ""} />
-            {countryFeatures.map((country, index) => <path className="mapCountry" d={pathGenerator(country as never) ?? ""} key={index} />)}
-            {mapPoints.map((point) => {
-              const projected = projection(point.coords) ?? [0, 0];
-              return <g className="mapPoint" key={point.id}><circle cx={projected[0]} cy={projected[1]} r="7" /><circle className="mapPulse" cx={projected[0]} cy={projected[1]} r="14" /><text x={projected[0] + point.dx} y={projected[1] + point.dy}>{point.label}</text></g>;
-            })}
-          </svg>
-          <div className="mapFilters" aria-label="按地图地区筛选">
-            {mapPoints.map((point) => <button key={point.id} onClick={() => selectFromMap(point.id)}>{point.label}<span>{channels.find((channel) => channel.id === point.id)?.products.length ?? 0} 款</span></button>)}
-          </div>
-        </div>
-      </section>
-
       <section className="section" id="channels">
-        <div className="sectionHead"><div><span className="sectionNo">02</span><h2>渠道地图</h2></div><p>“强”代表能够核验公开评价数；“中”代表只有评分或页面顺序；“有限”代表仅确认少量商品。</p></div>
+        <div className="sectionHead"><div><span className="sectionNo">01</span><h2>渠道总览</h2></div><p>“强”代表能够核验公开评价数；“中”代表只有评分或页面顺序；“有限”代表仅确认少量商品。</p></div>
         <div className="channelGrid">
           {channels.map((channel) => <a key={channel.id} className="channelCard" href={channel.url} target="_blank" rel="noreferrer">
             <div className="channelCardTop"><span>{channel.region}</span><span className={`evidence ${channel.evidence}`}>{channel.evidence}证据</span></div>
@@ -276,7 +231,7 @@ export default function Home() {
       </section>
 
       <section className="section productsSection" id="products">
-        <div className="sectionHead"><div><span className="sectionNo">03</span><h2>公开评价数优先榜</h2></div><p>排序优先采用商品页公开评价数。未显示评价数的平台按页面顺序补充，并明确标注，不再称为销量。</p></div>
+        <div className="sectionHead"><div><span className="sectionNo">02</span><h2>公开评价数优先榜</h2></div><p>排序优先采用商品页公开评价数。未显示评价数的平台按页面顺序补充，并明确标注，不再称为销量。</p></div>
         <div className="filterPanel">
           <div className="channelPills" aria-label="站点筛选"><button className={selectedChannel === "all" ? "active" : ""} onClick={() => setSelectedChannel("all")}>全部站点</button>{channels.map((channel) => <button key={channel.id} className={selectedChannel === channel.id ? "active" : ""} onClick={() => setSelectedChannel(channel.id)}>{channel.name}</button>)}</div>
           <div className="filterRow"><label className="searchBox"><span>⌕</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="搜索商品、ASIN 或站点" /></label><div className="categoryPills" aria-label="品类筛选">{categories.map((category) => <button key={category} className={selectedCategory === category ? "active" : ""} onClick={() => setSelectedCategory(category)}>{category}</button>)}</div></div>
@@ -299,7 +254,7 @@ export default function Home() {
       <section className="insightBand"><div><span>Review Signal</span><h2>评价数适合比较口碑积累，不等同于销量。</h2></div><p>同一 ASIN 在不同国家站点显示的评价数可能不同，且父子变体可能共享评价。因此本页把评价数视为公开需求代理，而非品牌后台成交数据。</p></section>
 
       <section className="section methodSection" id="method">
-        <div className="sectionHead"><div><span className="sectionNo">04</span><h2>口径与限制</h2></div><p>本页面是公开网页快照，不接触品牌卖家后台、广告后台或第三方付费销量数据库。</p></div>
+        <div className="sectionHead"><div><span className="sectionNo">03</span><h2>口径与限制</h2></div><p>本页面是公开网页快照，不接触品牌卖家后台、广告后台或第三方付费销量数据库。</p></div>
         <div className="methodGrid">
           <div><span>01</span><h3>评价数优先</h3><p>有公开评价数时按数量降序，不再使用“销量最高”表述。</p></div>
           <div><span>02</span><h3>没有就明确留白</h3><p>平台未显示评价数时，仅保留评分或页面陈列顺序。</p></div>
