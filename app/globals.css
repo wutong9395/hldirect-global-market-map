@@ -57,6 +57,21 @@ main { overflow: hidden; }
 .secondaryLinks a { text-decoration: underline; text-underline-offset: 3px; }
 .secondaryLinks .caveat { margin-left: auto; opacity: .62; }
 
+.mapSection { padding-top: 130px; }
+.worldMapWrap { border: 1px solid var(--ink); border-top: 0; background: rgba(255,255,255,.22); }
+.worldMap { display: block; width: 100%; height: auto; max-height: 620px; }
+.mapSphere { fill: rgba(255,255,255,.36); stroke: var(--ink); stroke-width: 1.2; }
+.mapCountry { fill: #d9d3c5; stroke: var(--paper); stroke-width: .75; transition: fill .18s; }
+.worldMap:hover .mapCountry { fill: #d1cab9; }
+.mapPoint circle:first-child { fill: var(--orange); stroke: var(--ink); stroke-width: 2; }
+.mapPoint .mapPulse { fill: none; stroke: var(--orange); stroke-width: 2; opacity: .48; }
+.mapPoint text { fill: var(--ink); font: 800 13px/1 Arial, sans-serif; paint-order: stroke; stroke: var(--paper); stroke-width: 5px; stroke-linejoin: round; }
+.mapFilters { display: grid; grid-template-columns: repeat(9, 1fr); border-top: 1px solid var(--ink); }
+.mapFilters button { min-width: 0; padding: 14px 8px; display: grid; gap: 4px; border: 0; border-right: 1px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer; font: 800 12px/1 Arial, sans-serif; }
+.mapFilters button:last-child { border-right: 0; }
+.mapFilters button:hover { background: var(--orange); }
+.mapFilters button span { font: 10px/1 var(--font-geist-mono), monospace; opacity: .65; }
+
 .productsSection { padding-top: 130px; }
 .filterPanel { position: sticky; top: 72px; z-index: 20; padding: 16px 0 0; background: var(--paper); border-bottom: 1px solid var(--ink); }
 .channelPills, .categoryPills { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -81,10 +96,12 @@ main { overflow: hidden; }
 .tableHead p, .tableHead a { margin: 0; font-size: 11px; line-height: 1.4; }
 .tableHead p { max-width: 300px; opacity: .7; }
 .tableHead a { white-space: nowrap; text-decoration: underline; text-underline-offset: 3px; }
-.productRow { min-height: 72px; padding: 0 18px; display: grid; grid-template-columns: 54px minmax(260px, 1.5fr) 100px minmax(190px, .7fr) 28px; gap: 16px; align-items: center; border-bottom: 1px solid var(--line); transition: background .16s; }
+.productRow { min-height: 86px; padding: 9px 18px; display: grid; grid-template-columns: 48px 68px minmax(240px, 1.5fr) 100px minmax(180px, .7fr) 28px; gap: 14px; align-items: center; border-bottom: 1px solid var(--line); transition: background .16s; }
 .productRow:last-child { border-bottom: 0; }
 .productRow:hover { background: #fff9ef; }
 .rank { font: 700 20px/1 Georgia, serif; color: var(--orange); }
+.productThumb { width: 64px; height: 64px; display: block; overflow: hidden; border: 1px solid var(--line); background: #fff; }
+.productThumb img { width: 100%; height: 100%; display: block; object-fit: contain; mix-blend-mode: multiply; }
 .productName { display: flex; flex-direction: column; gap: 5px; }
 .productName strong { font-size: 14px; }
 .productName small { font: 10px/1 var(--font-geist-mono), monospace; opacity: .55; }
@@ -121,7 +138,10 @@ footer button:hover { background: var(--paper); color: var(--ink); }
   .metrics > div:nth-child(2) { border-right: 0; }
   .metrics > div:nth-child(-n+2) { border-bottom: 1px solid var(--ink); }
   .thesis { grid-template-columns: 1fr; gap: 36px; }
-  .productRow { grid-template-columns: 48px minmax(220px, 1fr) 90px minmax(160px, .65fr) 24px; }
+  .mapFilters { grid-template-columns: repeat(5, 1fr); }
+  .mapFilters button:nth-child(5) { border-right: 0; }
+  .mapFilters button:nth-child(-n+5) { border-bottom: 1px solid var(--ink); }
+  .productRow { grid-template-columns: 42px 64px minmax(200px, 1fr) 90px minmax(150px, .65fr) 24px; }
   .filterPanel { position: static; }
 }
 
@@ -144,14 +164,22 @@ footer button:hover { background: var(--paper); color: var(--ink); }
   .channelGrid, .methodGrid { grid-template-columns: 1fr; }
   .channelCard { min-height: 190px; }
   .secondaryLinks .caveat { margin-left: 0; flex-basis: 100%; }
+  .mapSection { padding-top: 82px; }
+  .worldMap { min-width: 680px; transform: translateX(-145px); }
+  .worldMapWrap { overflow: hidden; }
+  .mapFilters { grid-template-columns: repeat(3, 1fr); }
+  .mapFilters button, .mapFilters button:nth-child(5) { border-right: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
+  .mapFilters button:nth-child(3n) { border-right: 0; }
+  .mapFilters button:nth-last-child(-n+3) { border-bottom: 0; }
   .filterRow { grid-template-columns: 1fr; }
   .tableHead { gap: 18px; }
   .tableHead > div:last-child { display: grid; gap: 10px; }
-  .productRow { padding: 14px; grid-template-columns: 38px 1fr auto; gap: 8px 12px; }
-  .productName { grid-column: 2 / 4; }
-  .category { grid-column: 2; }
-  .signal { grid-column: 2 / 4; }
-  .out { grid-column: 3; grid-row: 1; }
+  .productRow { padding: 12px; grid-template-columns: 34px 64px 1fr auto; gap: 8px 10px; }
+  .productThumb { grid-column: 2; grid-row: 1 / 4; }
+  .productName { grid-column: 3 / 5; }
+  .category { grid-column: 3; }
+  .signal { grid-column: 3 / 5; }
+  .out { grid-column: 4; grid-row: 1; }
   .insightBand { margin-top: 84px; gap: 32px; }
   .insightBand h2 { font-size: 47px; }
   footer { grid-template-columns: 1fr auto; gap: 26px; }
